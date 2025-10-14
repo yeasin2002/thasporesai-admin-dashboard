@@ -6,23 +6,28 @@ export type MenuItemsType = {
 
 export const dashboardMenuItems: MenuItemsType[] = [
   {
-    title: "overview",
-    href: "/dashboard/employee",
+    title: "Dashboard",
+    href: "/dashboard",
     icon: "fluent:home-24-filled",
   },
   {
-    title: "tasks",
-    href: "/dashboard/employee/tasks",
+    title: "User",
+    href: "/dashboard/user",
     icon: "teenyicons:box-solid",
   },
   {
-    title: "projects",
-    href: "/dashboard/employee/projects",
+    title: "Job",
+    href: "/dashboard/job",
     icon: "iconoir:wallet",
   },
   {
-    title: "timesheet",
-    href: "/dashboard/employee/timesheet",
+    title: "Payments",
+    href: "/dashboard/payments",
+    icon: "grommet-icons:line-chart",
+  },
+  {
+    title: "Settings",
+    href: "/dashboard/settings",
     icon: "grommet-icons:line-chart",
   },
 ];
