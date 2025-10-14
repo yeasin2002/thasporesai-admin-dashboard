@@ -47,10 +47,10 @@ export function Sidebar({ isOpen, onClose, navItems }: SidebarProps) {
                   to={item.href}
                   onClick={() => onClose()}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                    "flex items-center gap-2 rounded-md px-3 py-4 transition-all duration-200",
                     isActive
-                      ? "text-sidebar-accent-foreground bg-[#6B9BC2]"
-                      : "text-sidebar-foreground/60 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground",
+                      ? "bg-gradient-to-r from-[#6B9BC2] via-[#A3C4E0] to-[#6B9BC2] text-white shadow-sm"
+                      : "text-[#6B9BC2] hover:bg-gradient-to-r hover:from-[#A3C4E0] hover:via-[#6B9BC2] hover:to-[#A3C4E0] hover:text-white",
                   )}
                 >
                   <Icon icon={item.icon} width={20} height={20} color="" />
