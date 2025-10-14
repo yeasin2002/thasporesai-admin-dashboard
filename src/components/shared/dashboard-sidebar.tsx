@@ -2,9 +2,9 @@
 
 import { MenuItemsType } from "@/data";
 import { cn } from "@/utils";
+
 import { Link, useLocation } from "react-router";
-import { Logo } from "../logo";
-import { Icon } from "lucide-react";
+import { LogoIcon } from "./logo";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -33,7 +33,7 @@ export function Sidebar({ isOpen, onClose, navItems }: SidebarProps) {
         )}
       >
         <div className="ml-4 flex items-start justify-start">
-          <Logo />
+          <LogoIcon />
         </div>
 
         {/* Navigation */}

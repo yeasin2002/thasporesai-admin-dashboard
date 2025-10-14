@@ -24,7 +24,7 @@ export default defineConfig({
     tailwindcss(),
     Fonts({ google: { families: fonts } }),
     AutoImport({
-      imports: ["react", "react-router"],
+      imports: ["react", "react-router", { "@iconify-icon/react": ["Icon"] }],
       dts: "./auto-imports.d.ts",
       eslintrc: {
         enabled: true,

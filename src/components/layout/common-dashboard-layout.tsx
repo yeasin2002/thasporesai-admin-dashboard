@@ -1,4 +1,4 @@
-import { Navbar, Sidebar } from "@/components/shared/dashboard/dashboard-sidebar";
+import { Navbar, Sidebar } from "@/components/shared";
 import { MenuItemsType } from "@/data";
 import { Suspense, useState } from "react";
 import { Outlet } from "react-router";
