@@ -1,4 +1,3 @@
-import React from "react";
 import SearchAndFilterBar from "../user/search-filter-bar";
 import PaymentTable from "./payment-table";
 

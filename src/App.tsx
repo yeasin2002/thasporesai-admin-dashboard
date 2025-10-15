@@ -9,6 +9,7 @@ import { User } from "./page/dashboard/user";
 import { Job } from "./page/dashboard/job";
 import { Payments } from "./page/dashboard/payments";
 import { Settings } from "./page/dashboard/settings";
+import AdminProfileForm from "./page/dashboard/profile";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="job" element={<Job />} />
           <Route path="payments" element={<Payments />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="edit-profile" element={<AdminProfileForm />} />
         </Route>
 
         {/* <Route path="/" element={<Home />} errorElement={<RootErrorBoundary />} /> */}

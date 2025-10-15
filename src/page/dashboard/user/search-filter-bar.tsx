@@ -22,7 +22,7 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
     }
   };
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setFilterValue(value);
     if (onFilterChange) {

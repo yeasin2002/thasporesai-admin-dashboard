@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useRef, useEffect } from "react";
-
-function CertificationItem({ name, issuer, imageUrl }) {
+import { useEffect, useRef, useState } from "react";
+type TProps = {
+  name: string;
+  issuer: string;
+  imageUrl: string;
+};
+function CertificationItem({ name, issuer, imageUrl }: TProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = (e: any) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setIsMenuOpen(false);
       }

@@ -5,22 +5,21 @@ type Tprops = {
   setIsOpen: (open: boolean) => void;
 };
 function JobDrawerWith({ isOpen, setIsOpen }: Tprops) {
-  const isVerifiedAdmin = true;
+  //   const isVerifiedAdmin = true;
 
-  const shouldOpen = isVerifiedAdmin;
+  //   const shouldOpen = isVerifiedAdmin;
 
-  const toggleDrawer = () => {
-    if (shouldOpen) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-      alert("Permission denied. Only verified admins can access this drawer.");
-    }
-  };
+  //   const toggleDrawer = () => {
+  //     if (shouldOpen) {
+  //       setIsOpen(true);
+  //     } else {
+  //       setIsOpen(false);
+  //       alert("Permission denied. Only verified admins can access this drawer.");
+  //     }
+  //   };
 
   return (
     <div className="relative">
-      {/* Backdrop with smooth fade */}
       <div
         className={`fixed inset-0 z-40 bg-black transition-opacity duration-500 ease-out ${
           isOpen ? "pointer-events-auto opacity-50" : "pointer-events-none opacity-0"
@@ -37,7 +36,7 @@ function JobDrawerWith({ isOpen, setIsOpen }: Tprops) {
             : "cubic-bezier(0.7, 0, 0.84, 0)",
         }}
       >
-        {/* Header */}
+      
         <div className="flex items-center justify-between border-b border-gray-200 bg-white px-5 py-4">
           <h2 className="text-[24px] font-semibold text-[#000000]">Profile Details</h2>
           <button
@@ -56,13 +55,11 @@ function JobDrawerWith({ isOpen, setIsOpen }: Tprops) {
           </button>
         </div>
 
-
         <div className="h-full overflow-y-auto pb-10">
-          {/* Cover Image */}
+      
           <div className="h-48 w-full overflow-hidden bg-gray-200">
             <img src={drawerImage} alt="Cover" className="h-full w-full object-cover" />
           </div>
-
 
           <div className="my-4 border-b border-white bg-white px-5 py-4">
             <div className="flex items-start justify-between">
@@ -91,7 +88,6 @@ function JobDrawerWith({ isOpen, setIsOpen }: Tprops) {
               </div>
             </div>
           </div>
-
 
           <div className="my-8 border-b border-gray-100 bg-white px-5 py-4">
             <div className="mb-3 flex items-center justify-between">

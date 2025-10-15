@@ -96,7 +96,6 @@ const PaymentTable: React.FC = () => {
     },
   ]);
 
-  // Handler for the Export button
   const handleExport = () => {
     console.log("Exporting payment transactions data...");
     // Add your data export logic here (e.g., generating a CSV file)

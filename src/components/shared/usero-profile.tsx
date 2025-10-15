@@ -1,14 +1,14 @@
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router";
 
 const UserProfile = () => {
-
+  const navigate = useNavigate();
   const user = {
     name: "Liam Anderson",
     username: "@liamand",
@@ -17,7 +17,7 @@ const UserProfile = () => {
 
   const handleEditProfile = () => {
     console.log("Navigating to Edit Profile...");
-    // Add your navigation logic here (e.g., router.push('/edit-profile'))
+    navigate("edit-profile");
   };
 
   return (
