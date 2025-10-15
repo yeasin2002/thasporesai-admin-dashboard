@@ -1,5 +1,6 @@
 import { MoreVertical, User, X } from "lucide-react"; // Imported User icon for View Profile
 import React, { useState } from "react";
+import RightDrawerWithTailwind from "./job-profile-details";
 
 // 1. Updated Interface for Job Data
 interface Job {
@@ -18,8 +19,7 @@ interface Job {
 
 const JobManagementTable: React.FC = () => {
   const [openMenuId, setOpenMenuId] = useState<number | null>(null);
-
-  // 2. Modified state data to reflect Job data from the image
+  const [isOpen, setIsOpen] = useState(false);
   const [jobs, setJobs] = useState<Job[]>([
     {
       id: 1,
@@ -94,13 +94,11 @@ const JobManagementTable: React.FC = () => {
     setOpenMenuId(null);
   };
 
-  // Handler for 'View Profile'
   const handleViewProfile = (id: number) => {
-    console.log(`Viewing profile for job ID: ${id}`);
+    setIsOpen(true);
     setOpenMenuId(null);
   };
 
-  // Helper function for status badge styling
   const getStatusClasses = (status: Job["status"]) => {
     switch (status) {
       case "Completed":
@@ -227,6 +225,8 @@ const JobManagementTable: React.FC = () => {
               </tr>
             ))}
           </tbody>
+
+          {isOpen && isOpen && <RightDrawerWithTailwind isOpen={isOpen} setIsOpen={setIsOpen} />}
         </table>
       </div>
     </div>

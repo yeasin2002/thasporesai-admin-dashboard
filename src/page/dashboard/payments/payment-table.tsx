@@ -128,7 +128,7 @@ const PaymentTable: React.FC = () => {
   };
 
   return (
-    <div className="rounded-xl bg-white p-6 shadow-sm">
+    <div className="rounded-xl bg-[#F8F8F8] p-6 shadow-sm">
       {/* Header with Title and Export Button */}
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-semibold text-[#000000]">Payment Transactions</h2>
