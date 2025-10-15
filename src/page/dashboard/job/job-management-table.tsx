@@ -1,8 +1,7 @@
-import { MoreVertical, User, X } from "lucide-react"; // Imported User icon for View Profile
+import { MoreVertical, User, X } from "lucide-react";
 import React, { useState } from "react";
-import RightDrawerWithTailwind from "./job-profile-details";
+import JobDrawerWith from "./job-profile-details";
 
-// 1. Updated Interface for Job Data
 interface Job {
   id: number;
   jobId: string;
@@ -13,7 +12,7 @@ interface Job {
   contractorEmail: string;
   category: string;
   budget: number;
-  status: "Completed" | "Pending" | "Active" | "Cancelled"; // Updated statuses
+  status: "Completed" | "Pending" | "Active" | "Cancelled";
   postedDate: string;
 }
 
@@ -44,7 +43,7 @@ const JobManagementTable: React.FC = () => {
       contractorEmail: "asifraj@gmail.com",
       category: "Hiring",
       budget: 350,
-      status: "Pending", // Status corresponding to "Cancel Job" action in the image
+      status: "Pending",
       postedDate: "2023-10-13",
     },
     {
@@ -88,13 +87,13 @@ const JobManagementTable: React.FC = () => {
     },
   ]);
 
-  // Handler to 'Cancel' the job (or a similar action)
   const handleCancelJob = (id: number) => {
     setJobs(jobs.map((job) => (job.id === id ? { ...job, status: "Cancelled" } : job)));
     setOpenMenuId(null);
   };
 
   const handleViewProfile = (id: number) => {
+    console.log(id);
     setIsOpen(true);
     setOpenMenuId(null);
   };
@@ -121,7 +120,6 @@ const JobManagementTable: React.FC = () => {
       <div className="overflow-x-auto">
         <table className="mb-20 w-full">
           <thead>
-            {/* 3. Updated Table Header to match the image */}
             <tr className="border-b border-gray-200">
               <th className="px-4 py-3 text-left text-[16px] font-medium text-[##616161]">
                 Job ID
@@ -148,11 +146,9 @@ const JobManagementTable: React.FC = () => {
                 Posted Date
               </th>
               <th className="px-4 py-3 text-left text-[16px] font-medium text-[##616161]"></th>{" "}
-              {/* Action column */}
             </tr>
           </thead>
           <tbody>
-            {/* 4. Updated Table Body to display Job data */}
             {jobs.map((job) => (
               <tr key={job.id} className="border-b border-gray-100 hover:bg-gray-50">
                 <td className="px-4 py-3 text-[16px] font-medium text-[#212121]">{job.jobId}</td>
@@ -226,7 +222,7 @@ const JobManagementTable: React.FC = () => {
             ))}
           </tbody>
 
-          {isOpen && isOpen && <RightDrawerWithTailwind isOpen={isOpen} setIsOpen={setIsOpen} />}
+          {isOpen && isOpen && <JobDrawerWith isOpen={isOpen} setIsOpen={setIsOpen} />}
         </table>
       </div>
     </div>

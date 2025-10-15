@@ -1,5 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import drawerImage from "../../../assets/job-drawer-img.png";
-function RightDrawerWithTailwind({ isOpen, setIsOpen }) {
+type Tprops = {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+};
+function JobDrawerWith({ isOpen, setIsOpen }: Tprops) {
   const isVerifiedAdmin = true;
 
   const shouldOpen = isVerifiedAdmin;
@@ -22,8 +27,6 @@ function RightDrawerWithTailwind({ isOpen, setIsOpen }) {
         }`}
         onClick={() => setIsOpen(false)}
       />
-
-      {/* Drawer Panel */}
       <div
         className={`fixed top-0 right-0 z-50 h-full w-96 transform overflow-hidden bg-[#F8F8F8] shadow-2xl transition-all duration-500 ease-out ${
           isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
@@ -53,14 +56,14 @@ function RightDrawerWithTailwind({ isOpen, setIsOpen }) {
           </button>
         </div>
 
-        {/* Content - Scrollable */}
+
         <div className="h-full overflow-y-auto pb-10">
           {/* Cover Image */}
           <div className="h-48 w-full overflow-hidden bg-gray-200">
             <img src={drawerImage} alt="Cover" className="h-full w-full object-cover" />
           </div>
 
-          {/* Profile Section */}
+
           <div className="my-4 border-b border-white bg-white px-5 py-4">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
@@ -89,7 +92,7 @@ function RightDrawerWithTailwind({ isOpen, setIsOpen }) {
             </div>
           </div>
 
-          {/* Contact Information */}
+
           <div className="my-8 border-b border-gray-100 bg-white px-5 py-4">
             <div className="mb-3 flex items-center justify-between">
               <h4 className="text-sm font-semibold text-gray-900">Contact Information</h4>
@@ -142,7 +145,6 @@ function RightDrawerWithTailwind({ isOpen, setIsOpen }) {
             </p>
           </div>
 
-      
           <div className="px-5 py-4">
             <h4 className="mb-3 text-[16px] font-semibold text-[#000000]">Admin Actions</h4>
 
@@ -178,4 +180,4 @@ function RightDrawerWithTailwind({ isOpen, setIsOpen }) {
   );
 }
 
-export default RightDrawerWithTailwind;
+export default JobDrawerWith;
