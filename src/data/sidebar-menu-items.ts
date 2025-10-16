@@ -28,6 +28,6 @@ export const dashboardMenuItems: MenuItemsType[] = [
   {
     title: "Settings",
     href: "/dashboard/settings",
-    icon: "grommet-icons:line-chart",
+    icon: "uil:setting",
   },
 ];

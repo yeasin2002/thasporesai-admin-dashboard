@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Download, Eye } from "lucide-react"; // Icons for Export and View
+import { Download, Eye } from "lucide-react";
 
-// 1. Updated Interface for Payment Transaction Data
 interface PaymentTransaction {
   id: number;
   jobId: string;
@@ -9,13 +8,12 @@ interface PaymentTransaction {
   customer: string;
   contractor: string;
   amount: number;
-  commissionRate: number; // Stored as a flat percentage value, e.g., 5
+  commissionRate: number;
   status: "Completed" | "Pending" | "Failed";
   postedDate: string;
 }
 
 const PaymentTable: React.FC = () => {
-  // Simple state to hold the data
   const [transactions, setTransactions] = useState<PaymentTransaction[]>([
     {
       id: 1,
@@ -98,16 +96,12 @@ const PaymentTable: React.FC = () => {
 
   const handleExport = () => {
     console.log("Exporting payment transactions data...");
-    // Add your data export logic here (e.g., generating a CSV file)
   };
 
-  // Handler for the View action
   const handleView = (id: number) => {
     console.log(`Viewing transaction details for ID: ${id}`);
-    // Add logic to open a modal or navigate to a details page
   };
 
-  // Helper function for status badge styling
   const getStatusClasses = (status: PaymentTransaction["status"]) => {
     switch (status) {
       case "Completed":
@@ -128,7 +122,6 @@ const PaymentTable: React.FC = () => {
 
   return (
     <div className="rounded-xl bg-[#F8F8F8] p-6 shadow-sm">
-      {/* Header with Title and Export Button */}
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-semibold text-[#000000]">Payment Transactions</h2>
         <button
@@ -158,13 +151,13 @@ const PaymentTable: React.FC = () => {
               <th className="px-4 py-3 text-left text-[16px] font-medium text-[#616161]">
                 Commission ({transactions[0]?.commissionRate ?? 5}%)
               </th>{" "}
-              {/* Uses the rate from data */}
               <th className="px-4 py-3 text-left text-sm font-medium text-[#616161]">Status</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-[#616161]">
                 Posted Date
               </th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-[#616161]">Action</th>{" "}
-              {/* View column */}
+              <th className="px-4 py-3 text-left text-sm font-medium text-[#616161]">
+                Action
+              </th>{" "}
             </tr>
           </thead>
           <tbody>
@@ -180,17 +173,14 @@ const PaymentTable: React.FC = () => {
 
                 <td className="px-4 py-3 text-[16px] text-gray-700">{transaction.contractor}</td>
 
-                {/* Amount column - Styled as currency */}
                 <td className="px-4 py-3 text-[16px] font-medium text-[#212121]">
                   ${transaction.amount.toFixed(0)}
                 </td>
 
-                {/* Commission column - Styled as green text */}
                 <td className="px-4 py-3 text-[16px] font-medium text-green-600">
                   ${calculateCommission(transaction.amount, transaction.commissionRate)}
                 </td>
 
-                {/* Status Badge */}
                 <td className="px-4 py-3">
                   <span
                     className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${getStatusClasses(transaction.status)}`}
@@ -200,8 +190,6 @@ const PaymentTable: React.FC = () => {
                 </td>
 
                 <td className="px-4 py-3 text-[16px] text-gray-600">{transaction.postedDate}</td>
-
-                {/* View Button/Icon */}
                 <td className="px-4 py-3">
                   <button
                     onClick={() => handleView(transaction.id)}
