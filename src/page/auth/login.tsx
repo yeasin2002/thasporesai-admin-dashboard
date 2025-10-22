@@ -1,21 +1,49 @@
 import { Button } from "@/components/ui/button";
+import verifyToken from "@/hooks/verfyToken";
 import { AuthFooter, AuthInput, AuthTitle } from "@/page/auth/components";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { setUser } from "@/redux/features/auth/authslice";
 import { loginSchema, type LoginFormData } from "@/validations/auth.validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronRight, Lock, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 
 export function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "mdkawsarislam2002@gmail.com",
+      password: "yeasin2002",
+    },
   });
-
-  const onSubmit = (data: LoginFormData) => {
-    console.log("Login data:", data);
+  const [login, { error, isSuccess }] = useLoginMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const userInfo = {
+        email: data.email,
+        password: data.password,
+      };
+      const res = await login(userInfo).unwrap();
+      console.log(res.error);
+      if (res?.success) {
+        toast.success("Login successful");
+        const user = verifyToken(res.data?.accessToken);
+        dispatch(setUser({ user, token: res.data?.accessToken }));
+        navigate("/dashboard");
+      }else if(res?.error){
+        toast.error(res.error.data.message)
+      }
+    } catch (error: any) {
+      console.error("Login Error:", error);
+    }
   };
 
   return (
@@ -47,10 +75,39 @@ export function LoginPage() {
           <div className="flex justify-end pt-4">
             <Button
               type="submit"
-              className="h-12 rounded-lg bg-[#3d4f5c] px-12 text-white hover:bg-[#4a5d6a]"
+              disabled={isSubmitting}
+              className={`flex h-12 items-center justify-center gap-2 rounded-lg px-12 text-white transition-all duration-300 ${isSubmitting ? "cursor-not-allowed bg-[#3d4f5c]/70" : "bg-[#3d4f5c] hover:scale-[1.02] hover:bg-[#4a5d6a]"}`}
             >
-              Login
-              <ChevronRight className="ml-2 h-5 w-5" />
+              {isSubmitting ? (
+                <>
+                  <svg
+                    className="h-5 w-5 animate-spin text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    />
+                  </svg>
+                  <span className="font-medium">Signing in...</span>
+                </>
+              ) : (
+                <>
+                  <span className="font-medium">Login</span>
+                  <ChevronRight className="h-5 w-5" />
+                </>
+              )}
             </Button>
           </div>
         </form>

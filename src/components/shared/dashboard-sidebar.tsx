@@ -1,10 +1,12 @@
 "use client";
 
 import { MenuItemsType } from "@/data";
+import { logout } from "@/redux/features/auth/authslice";
+import { useAppDispatch } from "@/redux/hooks";
 import { cn } from "@/utils";
-import logo from "../../assets/logo.png";
 import { Link, useLocation } from "react-router";
-import { LogoIcon } from "./logo";
+import logo from "../../assets/logo.png";
+import { toast } from "sonner";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -13,8 +15,14 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, onClose, navItems }: SidebarProps) {
+  const navigate = useNavigate();
   const pathname = useLocation();
-
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+    toast.error("Logout Successfully");
+  };
   return (
     <>
       {isOpen && (
@@ -65,7 +73,9 @@ export function Sidebar({ isOpen, onClose, navItems }: SidebarProps) {
 
         <button className="text-muted-foreground flex items-center gap-3 rounded-lg px-4 py-2.5 pt-4 pb-6">
           <Icon icon={"tdesign:poweroff"} width={24} height={24} />
-          <span className="text-sm font-medium transition-colors">Log Out</span>
+          <span className="text-sm font-medium transition-colors" onClick={handleLogout}>
+            Log Out
+          </span>
         </button>
       </aside>
     </>

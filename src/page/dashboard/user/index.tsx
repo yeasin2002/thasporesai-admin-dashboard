@@ -4,8 +4,10 @@ import UserTable from "./user-table";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 export const User = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const handleSearchSubmit = (query: string, filter: string) => {
     console.log(`Searching for: "${query}" in the "${filter}" category.`);
+    setSearchQuery(query);
   };
 
   const handleFilterSelection = (filter: string, query: string) => {
@@ -33,10 +35,10 @@ export const User = () => {
           </TabList>
 
           <TabPanel>
-            <UserTable />
+            <UserTable searchTerm={searchQuery} />
           </TabPanel>
           <TabPanel>
-            <ContractorTable />
+            <ContractorTable searchTerm={searchQuery} />
           </TabPanel>
         </Tabs>
       </div>

@@ -10,6 +10,7 @@ import { Job } from "./page/dashboard/job";
 import { Payments } from "./page/dashboard/payments";
 import { Settings } from "./page/dashboard/settings";
 import AdminProfileForm from "./page/dashboard/profile";
+import { ProtectedRoute } from "./hooks/protectedRoute";
 
 const App = () => {
   return (
@@ -25,7 +26,11 @@ const App = () => {
 
         <Route
           path="/dashboard"
-          element={<CommonDashboardLayout navItems={dashboardMenuItems} />}
+          element={
+            <ProtectedRoute>
+              <CommonDashboardLayout navItems={dashboardMenuItems} />
+            </ProtectedRoute>
+          }
           errorElement={<RootErrorBoundary />}
         >
           <Route index element={<DashboardOverview />} />
