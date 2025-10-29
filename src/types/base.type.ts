@@ -1,0 +1,24 @@
+export type User = {
+  _id: string;
+  role: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  is_verified: boolean;
+  isSuspend: boolean;
+  category: [];
+  skills: [];
+  experience: [];
+  work_samples: [];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  location: [];
+  bio: string;
+  cover_img: string;
+  description: string;
+  hourly_charge: number;
+  profile_img: string;
+  review: [];
+  starting_budget: number;
+};
