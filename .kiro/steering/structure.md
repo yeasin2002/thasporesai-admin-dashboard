@@ -16,6 +16,9 @@
 
 ```
 src/
+├── api/                 # Images, SVGs, static files
+│   │── api-hooks/       # react hooks with tanstack query and axios 
+│   │── query-list/       # query list and types with axios 
 ├── assets/                 # Images, SVGs, static files
 ├── components/             # React components
 │   ├── layout/            # Layout components (AuthLayout, DashboardLayout)
