@@ -1,10 +1,10 @@
 "use client";
 
 import { MenuItemsType } from "@/data";
+import useAuthStore from "@/store/auth.store";
 import { cn } from "@/utils";
-import logo from "../../assets/logo.png";
 import { Link, useLocation } from "react-router";
-import { LogoIcon } from "./logo";
+import logo from "../../assets/logo.png";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -14,6 +14,13 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose, navItems }: SidebarProps) {
   const pathname = useLocation();
+  const auth = useAuthStore();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    auth.clearAuth();
+    return navigate("/");
+  };
 
   return (
     <>
@@ -63,7 +70,10 @@ export function Sidebar({ isOpen, onClose, navItems }: SidebarProps) {
 
         {/* Logout */}
 
-        <button className="text-muted-foreground flex items-center gap-3 rounded-lg px-4 py-2.5 pt-4 pb-6">
+        <button
+          className="text-muted-foreground flex cursor-pointer items-center gap-3 rounded-lg px-4 py-2.5 pt-4 pb-6"
+          onClick={logoutHandler}
+        >
           <Icon icon={"tdesign:poweroff"} width={24} height={24} />
           <span className="text-sm font-medium transition-colors">Log Out</span>
         </button>
