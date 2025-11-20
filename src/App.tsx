@@ -18,9 +18,9 @@ const App = () => {
         <Route path="/" element={<AuthLayout />} errorElement={<RootErrorBoundary />}>
           <Route index element={<LoginPage />} />
           {/* <Route path="register" element={<Register />} /> */}
+          {/* <Route path="otp" element={<OtpPage />} /> */}
 
           <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="otp" element={<OtpPage />} />
           <Route path="reset-password" element={<ResetPassword />} />
         </Route>
 
