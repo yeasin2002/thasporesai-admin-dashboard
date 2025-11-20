@@ -10,7 +10,7 @@ export const AuthFooter = ({ title, subtitle, url }: Props) => {
   return (
     <div className="flex items-center justify-between border-t border-gray-400 pt-6 text-sm">
       <button className="text-gray-400 transition-colors hover:text-white">{title}</button>
-      <Link to={url} className="text-gray-400 transition-colors hover:text-white">
+      <Link to={url} className="text-gray-400 transition-colors hover:text-gray-500/90">
         {subtitle}
       </Link>
     </div>

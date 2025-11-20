@@ -8,3 +8,17 @@ export type AuthSuccessResponse = {
   accessToken: string;
   data: { user: User };
 };
+
+export type ForgotPasswordResponse = {
+  status: number;
+  message: string;
+  success: boolean;
+  data: string;
+};
+
+export type ResetPasswordResponse = {
+  status: number;
+  message: string;
+  success: boolean;
+  data: string;
+};

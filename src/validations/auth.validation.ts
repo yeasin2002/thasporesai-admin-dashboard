@@ -22,6 +22,7 @@ export const loginSchema = z.object({
 
 export const resetPasswordSchema = z
   .object({
+    otp: z.string().length(4, "OTP must be exactly 4 digits"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string().min(6, "Password must be at least 6 characters"),
   })

@@ -10,6 +10,7 @@ import axios, { AxiosError } from "axios";
 import { ChevronRight, Lock, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -87,7 +88,11 @@ export function LoginPage() {
             </Button>
           </div>
         </form>
-        <AuthFooter title="Don't have an account" subtitle="Forgot Password?" url="/register" />
+        <AuthFooter
+          title="Don't have an account"
+          subtitle="Forgot Password?"
+          url="/forgot-password"
+        />
       </div>
     </div>
   );

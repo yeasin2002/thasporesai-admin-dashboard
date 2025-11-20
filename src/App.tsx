@@ -3,13 +3,13 @@ import { NotFound, RootErrorBoundary } from "./page";
 
 import { AuthLayout, CommonDashboardLayout } from "./components/layout";
 import { dashboardMenuItems } from "./data";
-import { ForgotPassword, LoginPage, OtpPage, Register, ResetPassword } from "./page/auth";
+import { ForgotPassword, LoginPage, OtpPage, ResetPassword } from "./page/auth";
 import { DashboardOverview } from "./page/dashboard/dashboard-overview";
-import { User } from "./page/dashboard/user";
 import { Job } from "./page/dashboard/job";
 import { Payments } from "./page/dashboard/payments";
-import { Settings } from "./page/dashboard/settings";
 import AdminProfileForm from "./page/dashboard/profile";
+import { Settings } from "./page/dashboard/settings";
+import { User } from "./page/dashboard/user";
 
 const App = () => {
   return (
@@ -17,10 +17,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AuthLayout />} errorElement={<RootErrorBoundary />}>
           <Route index element={<LoginPage />} />
+          {/* <Route path="register" element={<Register />} /> */}
+
           <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="register" element={<Register />} />
-          <Route path="reset-password" element={<ResetPassword />} />
           <Route path="otp" element={<OtpPage />} />
+          <Route path="reset-password" element={<ResetPassword />} />
         </Route>
 
         <Route
