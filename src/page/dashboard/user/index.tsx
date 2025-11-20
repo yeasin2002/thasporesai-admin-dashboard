@@ -13,9 +13,11 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useDebounce } from "@uidotdev/usehooks";
 
 export const User = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const [currentFilter, setCurrentFilter] = useState("asc");
   const [page, setPage] = useState(1);
 
@@ -36,7 +38,7 @@ export const User = () => {
   const sortOrder = ["asc", "desc"];
 
   const searchParams = {
-    search: searchQuery || undefined,
+    search: debouncedSearchQuery || undefined,
     sortOrder: currentFilter as "asc" | "desc",
     page,
     limit: 10,
