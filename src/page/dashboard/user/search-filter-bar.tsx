@@ -1,3 +1,10 @@
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import React, { useState } from "react";
 
 interface SearchAndFilterBarProps {
@@ -9,7 +16,7 @@ interface SearchAndFilterBarProps {
 const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
   onSearch,
   onFilterChange,
-  filterOptions = ["Customers", "Employees", "Projects"],
+  filterOptions = [],
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterValue, setFilterValue] = useState(filterOptions[0]);
@@ -22,8 +29,7 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
     }
   };
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
+  const handleFilterChange = (value: string) => {
     setFilterValue(value);
     if (onFilterChange) {
       onFilterChange(value, searchQuery);
@@ -31,7 +37,7 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-between rounded-lg bg-[#F8F8F8] p-5 shadow-sm mb-4">
+    <div className="mb-4 flex items-center justify-between rounded-lg bg-[#F8F8F8] p-5 shadow-sm">
       {/* Search Input Field */}
       <div className="relative mr-4 flex-grow">
         <input
@@ -61,36 +67,18 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
       </div>
 
       {/* Filter Dropdown Menu */}
-      <div className="relative">
-        <select
-          value={filterValue}
-          onChange={handleFilterChange}
-          className="block w-full cursor-pointer appearance-none rounded-md border border-gray-200 bg-white py-2 pr-8 pl-4 leading-tight text-gray-700 shadow-sm transition-colors focus:border-blue-500 focus:bg-white focus:outline-none"
-        >
+      <Select value={filterValue} onValueChange={handleFilterChange}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Theme" />
+        </SelectTrigger>
+        <SelectContent>
           {filterOptions.map((option) => (
-            <option key={option} value={option}>
+            <SelectItem key={option} value={option}>
               {option}
-            </option>
+            </SelectItem>
           ))}
-        </select>
-
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          <svg
-            className="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 9l-7 7-7-7"
-            ></path>
-          </svg>
-        </div>
-      </div>
+        </SelectContent>
+      </Select>
     </div>
   );
 };

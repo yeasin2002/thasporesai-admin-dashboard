@@ -1,9 +1,9 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import StatusFilterDropdown from "./status-filter";
 import ContractorTable from "../user/constructor-table";
-import UserTable from "../user/user-table";
+import UserTable from "../user/user-table-container";
 import HelpSupportTable from "./help-support-table";
 import SettingsPage from "./settingsMain";
+import StatusFilterDropdown from "./status-filter";
 
 export const Settings = () => {
   return (

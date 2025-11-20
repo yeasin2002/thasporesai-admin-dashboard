@@ -3,7 +3,7 @@ import { NotFound, RootErrorBoundary } from "./page";
 
 import { AuthLayout, CommonDashboardLayout } from "./components/layout";
 import { dashboardMenuItems } from "./data";
-import { ForgotPassword, LoginPage, OtpPage, ResetPassword } from "./page/auth";
+import { ForgotPassword, LoginPage, ResetPassword } from "./page/auth";
 import { DashboardOverview } from "./page/dashboard/dashboard-overview";
 import { Job } from "./page/dashboard/job";
 import { Payments } from "./page/dashboard/payments";

@@ -1,9 +1,9 @@
 import { useUsers } from "@/api/api-hooks/useUsers";
 import type { User } from "@/api/api-types/user.types";
 import React, { useMemo } from "react";
-import { UserTable, type Contractor } from "./user-table";
+import { UserTable, type Customer } from "./user-table";
 
-interface ContractorTableProps {
+interface CustomerTableProps {
   searchParams?: {
     search?: string;
     location?: string;
@@ -13,13 +13,13 @@ interface ContractorTableProps {
   };
 }
 
-export const ContractorTable: React.FC<ContractorTableProps> = ({ searchParams }) => {
+export const CustomerTable: React.FC<CustomerTableProps> = ({ searchParams }) => {
   const { data, isLoading, error } = useUsers({
-    role: "contractor",
+    role: "customer",
     ...searchParams,
   });
 
-  const contractors: Contractor[] = useMemo(() => {
+  const customers: Customer[] = useMemo(() => {
     if (!data?.data?.users) return [];
 
     return data.data.users.map((user: User) => ({
@@ -29,33 +29,29 @@ export const ContractorTable: React.FC<ContractorTableProps> = ({ searchParams }
       phone: user.phone,
       location: user.address || user.location || "N/A",
       status: user.isSuspend ? "Suspended" : "Active",
-      skills: user.skills || [],
-      rating: 4.5, // TODO: Add rating field to API
-      reviews: 0, // TODO: Add reviews field to API
-      doneJobs: user.total_jobs,
-      verification: user.is_verified ? "Verified" : "Pending",
+      jobPosted: user.total_jobs,
     }));
   }, [data]);
 
   const handleView = (id: number) => {
-    console.log("View contractor:", id);
+    console.log("View customer:", id);
   };
 
   const handleSuspend = (id: number) => {
-    console.log("Suspend contractor:", id);
+    console.log("Suspend customer:", id);
     // TODO: Implement suspend API call
   };
 
   const handleDelete = (id: number) => {
-    console.log("Delete contractor:", id);
+    console.log("Delete customer:", id);
     // TODO: Implement delete API call
   };
 
   return (
     <UserTable
-      title="Contractors"
-      data={contractors}
-      userType="contractor"
+      title="Customers"
+      data={customers}
+      userType="customer"
       isLoading={isLoading}
       error={error}
       onView={handleView}

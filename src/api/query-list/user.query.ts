@@ -16,7 +16,7 @@ import {
  */
 export const getUsers = async (params?: GetUsersParams): Promise<UsersResponse> => {
   try {
-    const { data } = await axiosInstance.get<UsersResponse>("/api/user", { params });
+    const { data } = await axiosInstance.get<UsersResponse>("/user", { params });
     return data;
   } catch (error) {
     // Type-safe error handling
@@ -35,7 +35,7 @@ export const getUsers = async (params?: GetUsersParams): Promise<UsersResponse> 
  */
 export const getCurrentUser = async (): Promise<UserResponse> => {
   try {
-    const { data } = await axiosInstance.get<UserResponse>("/api/user/me");
+    const { data } = await axiosInstance.get<UserResponse>("/user/me");
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -54,7 +54,7 @@ export const getCurrentUser = async (): Promise<UserResponse> => {
  */
 export const getUserById = async (id: string): Promise<UserResponse> => {
   try {
-    const { data } = await axiosInstance.get<UserResponse>(`/api/user/${id}`);
+    const { data } = await axiosInstance.get<UserResponse>(`/user/${id}`);
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -73,7 +73,7 @@ export const getUserById = async (id: string): Promise<UserResponse> => {
  */
 export const updateCurrentUser = async (userData: UpdateUserData): Promise<UserResponse> => {
   try {
-    const { data } = await axiosInstance.patch<UserResponse>("/api/user/me", userData);
+    const { data } = await axiosInstance.patch<UserResponse>("/user/me", userData);
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {
