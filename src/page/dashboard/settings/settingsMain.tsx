@@ -1,10 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -12,8 +9,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Save } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface SettingsFormData {
   autoApprove: boolean;
@@ -196,25 +196,6 @@ const SettingsPage = () => {
           {/* Payment Section */}
           <div className="space-y-6 rounded-md bg-[#F8F8F8] p-5">
             <h2 className="text-[20px] font-semibold text-[#000000]">Payment Information</h2>
-
-            <div>
-              <label className="mb-2 block text-sm font-medium text-[#616161]">
-                Payment Provider
-              </label>
-              <Select
-                value={paymentProvider}
-                onValueChange={(value) => setValue("paymentProvider", value)}
-              >
-                <SelectTrigger className="w-1/2 bg-white py-6">
-                  <SelectValue placeholder="Select provider" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Stripe">Stripe</SelectItem>
-                  <SelectItem value="PayPal">PayPal</SelectItem>
-                  <SelectItem value="Square">Square</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[#616161]">

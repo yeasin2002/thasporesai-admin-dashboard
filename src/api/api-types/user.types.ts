@@ -34,7 +34,7 @@ export interface User {
   __v: number;
   total_jobs: number;
   // Optional fields that may exist
-  location?: string;
+  location?: string[];
   availability?: string | null;
   category?: string[];
   skills?: string[];

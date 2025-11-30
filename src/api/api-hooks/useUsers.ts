@@ -51,7 +51,7 @@ export const useCurrentUser = () => {
  * const user = data?.data; // User object
  * ```
  */
-export const useUser = (id: string) => {
+export const useUserById = (id: string) => {
   return useQuery({
     queryKey: ["users", id],
     queryFn: () => getUserById(id),
