@@ -1,18 +1,11 @@
 import { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { ContractorTable } from "./constructor-table";
+import { PaginationControls } from "./pagination-controls";
 import SearchAndFilterBar from "./search-filter-bar";
 import { CustomerTable } from "./user-table-container";
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import type { Pagination } from "@/api/api-types/user.types";
 import { useDebounce } from "@uidotdev/usehooks";
 
 export const User = () => {
@@ -20,6 +13,11 @@ export const User = () => {
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const [currentFilter, setCurrentFilter] = useState("asc");
   const [page, setPage] = useState(1);
+  const [activeTab, setActiveTab] = useState(0); // Track which tab is active
+
+  // Separate pagination states for customers and contractors
+  const [customerPagination, setCustomerPagination] = useState<Pagination | null>(null);
+  const [contractorPagination, setContractorPagination] = useState<Pagination | null>(null);
 
   const handleSearchSubmit = (query: string, filter: string) => {
     console.log(`Searching for: "${query}" in the "${filter}" category.`);
@@ -32,7 +30,18 @@ export const User = () => {
     console.log(`Filter changed to: "${filter}". Current search is: "${query}".`);
     setCurrentFilter(filter);
     setSearchQuery(query);
-    setPage(1); // Reset to first page on filter change
+    setPage(1);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    // Scroll to top when page changes
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleTabChange = (index: number) => {
+    setActiveTab(index);
+    setPage(1); // Reset page when switching tabs
   };
 
   const sortOrder = ["asc", "desc"];
@@ -52,7 +61,7 @@ export const User = () => {
         filterOptions={sortOrder}
       />
       <div>
-        <Tabs>
+        <Tabs selectedIndex={activeTab} onSelect={handleTabChange}>
           <TabList className="my-6 flex gap-4">
             <Tab className="react-tabs__tab--selected:font-bold text-[18px] text-[#13527F]">
               Customers
@@ -64,32 +73,36 @@ export const User = () => {
           </TabList>
 
           <TabPanel>
-            <CustomerTable searchParams={searchParams} />
+            <CustomerTable searchParams={searchParams} onPaginationChange={setCustomerPagination} />
           </TabPanel>
           <TabPanel>
-            <ContractorTable searchParams={searchParams} />
+            <ContractorTable
+              searchParams={searchParams}
+              onPaginationChange={setContractorPagination}
+            />
           </TabPanel>
         </Tabs>
       </div>
 
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" size={undefined} />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" size={undefined}>
-              1
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" size={undefined} />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      {/* Dynamic pagination controls - show based on active tab */}
+      {activeTab === 0 && customerPagination && (
+        <PaginationControls
+          currentPage={customerPagination.currentPage}
+          totalPages={customerPagination.totalPages}
+          onPageChange={handlePageChange}
+          hasNextPage={customerPagination.hasNextPage}
+          hasPrevPage={customerPagination.hasPrevPage}
+        />
+      )}
+      {activeTab === 1 && contractorPagination && (
+        <PaginationControls
+          currentPage={contractorPagination.currentPage}
+          totalPages={contractorPagination.totalPages}
+          onPageChange={handlePageChange}
+          hasNextPage={contractorPagination.hasNextPage}
+          hasPrevPage={contractorPagination.hasPrevPage}
+        />
+      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useUsers } from "@/api/api-hooks/useUsers";
-import type { User } from "@/api/api-types/user.types";
+import type { Pagination, User } from "@/api/api-types/user.types";
 import React, { useMemo } from "react";
 import { UserTable, type Contractor } from "./user-table";
 
@@ -11,13 +11,24 @@ interface ContractorTableProps {
     page?: number;
     limit?: number;
   };
+  onPaginationChange?: (pagination: Pagination) => void;
 }
 
-export const ContractorTable: React.FC<ContractorTableProps> = ({ searchParams }) => {
+export const ContractorTable: React.FC<ContractorTableProps> = ({
+  searchParams,
+  onPaginationChange,
+}) => {
   const { data, isLoading, error } = useUsers({
     role: "contractor",
     ...searchParams,
   });
+
+  // Notify parent of pagination changes
+  React.useEffect(() => {
+    if (data?.data?.pagination && onPaginationChange) {
+      onPaginationChange(data.data.pagination);
+    }
+  }, [data?.data?.pagination, onPaginationChange]);
 
   const contractors: Contractor[] = useMemo(() => {
     if (!data?.data?.users) return [];
