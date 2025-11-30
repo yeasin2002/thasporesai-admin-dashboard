@@ -57,7 +57,14 @@ export interface UsersResponse {
   message: string;
   data: {
     users: User[];
-    pagination: Pagination;
+    pagination: {
+      currentPage: number;
+      totalPages: number;
+      totalUsers: number;
+      limit: number;
+      hasNextPage: boolean;
+      hasPrevPage: boolean;
+    };
   };
   success: boolean;
 }

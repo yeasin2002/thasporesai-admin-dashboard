@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { ContractorTable } from "./constructor-table";
-import { PaginationControls } from "./pagination-controls";
 import SearchAndFilterBar from "./search-filter-bar";
-import { CustomerTable } from "./user-table-container";
 
+import { useUsers } from "@/api/api-hooks/useUsers";
 import type { Pagination } from "@/api/api-types/user.types";
 import { useDebounce } from "@uidotdev/usehooks";
+import { PaginationControls } from "./pagination-controls";
+import { UserTable } from "./user-table";
 
 export const User = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,6 +52,8 @@ export const User = () => {
     page,
     limit: 10,
   };
+  const { data } = useUsers(searchParams);
+  console.log("🚀 ~ User ~ data:", data);
 
   return (
     <div>
@@ -73,13 +75,10 @@ export const User = () => {
           </TabList>
 
           <TabPanel>
-            <CustomerTable searchParams={searchParams} onPaginationChange={setCustomerPagination} />
+            <UserTable users={data?.data.users} />
           </TabPanel>
           <TabPanel>
-            <ContractorTable
-              searchParams={searchParams}
-              onPaginationChange={setContractorPagination}
-            />
+            <UserTable users={data?.data.users} />
           </TabPanel>
         </Tabs>
       </div>
