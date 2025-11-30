@@ -50,7 +50,7 @@ const SettingsPage = () => {
   });
 
   const autoApprove = watch("autoApprove");
-  const paymentProvider = watch("paymentProvider");
+  // const paymentProvider = watch("paymentProvider");
   const paymentSchedule = watch("paymentSchedule");
   const securityContractors = watch("securityContractors");
   const supportContractors = watch("supportContractors");

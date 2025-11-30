@@ -1,6 +1,4 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import ContractorTable from "../user/constructor-table";
-import UserTable from "../user/user-table-container";
 import HelpSupportTable from "./help-support-table";
 import SettingsPage from "./settingsMain";
 import StatusFilterDropdown from "./status-filter";

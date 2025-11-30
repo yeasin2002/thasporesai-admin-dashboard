@@ -1,4 +1,5 @@
 import { Job, JobStatus } from "@/api/api-types/job.types";
+import { TableSkeletonLoader } from "@/components/shared/table-skeleton-loader";
 import {
   Table,
   TableBody,
@@ -50,11 +51,7 @@ const JobManagementTable = ({ jobs, isLoading, error }: Props) => {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center py-10">
-        <p className="text-gray-500">Loading jobs...</p>
-      </div>
-    );
+    return <TableSkeletonLoader rows={5} columns={7} />;
   }
 
   if (error) {

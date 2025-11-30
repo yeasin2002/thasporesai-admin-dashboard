@@ -40,8 +40,7 @@ export const User = () => {
     limit: 10,
   };
 
-  const { data } = useUsers(params);
-  console.log("🚀 ~ User ~ data:", data);
+  const { data, isLoading, error } = useUsers(params);
 
   return (
     <div>
@@ -69,10 +68,10 @@ export const User = () => {
           </TabList>
 
           <TabPanel>
-            <UserTable users={data?.data.users} />
+            <UserTable users={data?.data.users} isLoading={isLoading} error={error} />
           </TabPanel>
           <TabPanel>
-            <UserTable users={data?.data.users} />
+            <UserTable users={data?.data.users} isLoading={isLoading} error={error} />
           </TabPanel>
         </Tabs>
       </div>
