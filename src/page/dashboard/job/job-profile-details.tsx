@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import drawerImage from "../../../assets/job-drawer-img.png";
 type Tprops = {
   isOpen: boolean;
@@ -36,7 +35,6 @@ function JobDrawerWith({ isOpen, setIsOpen }: Tprops) {
             : "cubic-bezier(0.7, 0, 0.84, 0)",
         }}
       >
-      
         <div className="flex items-center justify-between border-b border-gray-200 bg-white px-5 py-4">
           <h2 className="text-[24px] font-semibold text-[#000000]">Profile Details</h2>
           <button
@@ -56,7 +54,6 @@ function JobDrawerWith({ isOpen, setIsOpen }: Tprops) {
         </div>
 
         <div className="h-full overflow-y-auto pb-10">
-      
           <div className="h-48 w-full overflow-hidden bg-gray-200">
             <img src={drawerImage} alt="Cover" className="h-full w-full object-cover" />
           </div>
