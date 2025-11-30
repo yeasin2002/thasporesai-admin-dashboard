@@ -10,8 +10,11 @@ import { Payments } from "./page/dashboard/payments";
 import AdminProfileForm from "./page/dashboard/profile";
 import { Settings } from "./page/dashboard/settings";
 import { User } from "./page/dashboard/user";
+import useAuthStore from "./store/auth.store";
 
 const App = () => {
+  const { accessToken } = useAuthStore.getState();
+  console.log("accessToken", accessToken);
   return (
     <BrowserRouter>
       <Routes>

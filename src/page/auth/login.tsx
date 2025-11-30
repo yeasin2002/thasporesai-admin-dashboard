@@ -29,9 +29,13 @@ export function LoginPage() {
     },
 
     onSuccess: (status) => {
-      console.log("🚀 ~ LoginPage ~ status:", status);
+
+      console.table({
+        accessToken: status.data.data.accessToken,
+        refreshToken: status.data.data.refreshToken,
+      });
       setUser(status.data.data.user);
-      setTokens(status.data.accessToken, status.data.refreshToken);
+      setTokens(status.data.data.accessToken, status.data.data.refreshToken);
 
       toast.success("Login successful");
       return navigate("/dashboard");
