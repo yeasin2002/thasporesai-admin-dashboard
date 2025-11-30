@@ -3,18 +3,37 @@ import { SortOrder } from "./user.types";
 export type JobStatus = "open" | "in-progress" | "completed" | "cancelled";
 export type JobSortField = "createdAt" | "updatedAt" | "title" | "budget" | "date";
 
+export interface LocationObject {
+  coordinates: number[];
+  _id: string;
+  name: string;
+  state: string;
+}
+
+export interface CategoryObject {
+  _id: string;
+  name: string;
+  icon: string;
+}
+
+export interface UserReference {
+  _id: string;
+  email: string;
+  phone: string;
+}
+
 export interface Job {
   _id: string;
   title: string;
-  category: string[];
+  category: (string | CategoryObject)[];
   description: string;
-  location: string;
+  location: string | LocationObject;
   address: string;
   budget: number;
   date: string;
   coverImg: string;
-  customerId: string;
-  contractorId: string;
+  customerId: string | UserReference;
+  contractorId: string | UserReference;
   status: JobStatus;
   isApplied: boolean;
   createdAt: string;
