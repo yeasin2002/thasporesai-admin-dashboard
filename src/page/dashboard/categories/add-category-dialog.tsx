@@ -13,11 +13,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/utils";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const AddCategoryDialog = () => {
+interface Props extends React.ComponentProps<"button"> {}
+
+const AddCategoryDialog = ({ className, ...props }: Props) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -49,7 +52,7 @@ const AddCategoryDialog = () => {
       setDescription("");
       setIcon(null);
     } catch (error) {
-      console.log("🚀 ~ handleSubmit ~ error:", error)
+      console.log("🚀 ~ handleSubmit ~ error:", error);
       toast.error("Failed to create category");
     }
   };
@@ -64,7 +67,7 @@ const AddCategoryDialog = () => {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button className="bg-[#13527F] hover:bg-[#0f3f63]">
+        <Button className={cn("bg-[#13527F] hover:bg-[#0f3f63]", className)} {...props}>
           <Plus className="mr-2 h-4 w-4" />
           Add Category
         </Button>

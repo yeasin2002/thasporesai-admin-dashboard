@@ -5,18 +5,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/utils";
 import React, { useState } from "react";
 
-interface SearchAndFilterBarProps {
+interface SearchAndFilterBarProps extends React.ComponentProps<"div"> {
   onSearch?: (query: string, filter: string) => void;
   onFilterChange?: (filter: string, query: string) => void;
   filterOptions?: string[];
+  children?: React.ReactNode;
 }
 
 const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
   onSearch,
   onFilterChange,
   filterOptions = [],
+  children,
+  className,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterValue, setFilterValue] = useState(filterOptions[0]);
@@ -37,7 +41,12 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
   };
 
   return (
-    <div className="mb-4 flex items-center justify-between rounded-lg bg-[#F8F8F8] p-5 shadow-sm">
+    <div
+      className={cn(
+        "mb-4 flex items-center justify-between rounded-lg bg-[#F8F8F8] p-5 shadow-sm",
+        className,
+      )}
+    >
       {/* Search Input Field */}
       <div className="relative mr-4 flex-grow">
         <input
@@ -79,6 +88,8 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
           ))}
         </SelectContent>
       </Select>
+
+      {children}
     </div>
   );
 };

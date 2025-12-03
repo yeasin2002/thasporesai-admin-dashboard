@@ -36,14 +36,13 @@ export const Categories = () => {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
-        <SearchAndFilterBar
-          onSearch={handleSearchSubmit}
-          onFilterChange={handleFilterSelection}
-          filterOptions={sortOrder}
-        />
-        <AddCategoryDialog />
-      </div>
+      <SearchAndFilterBar
+        onSearch={handleSearchSubmit}
+        onFilterChange={handleFilterSelection}
+        filterOptions={sortOrder}
+      >
+        <AddCategoryDialog className="ml-6" />
+      </SearchAndFilterBar>
       <div>
         <CategoryTable categories={data?.data.categories} isLoading={isLoading} error={error} />
       </div>

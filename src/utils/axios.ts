@@ -14,7 +14,6 @@ let isRefreshing = false;
 // Request interceptor - attach access token
 axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const { accessToken } = useAuthStore.getState();
-  console.log("accessToken", accessToken);
 
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
