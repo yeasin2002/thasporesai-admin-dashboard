@@ -10,7 +10,7 @@ import {
   Categories,
   DashboardOverview,
   Job,
-  Location,
+  Locations,
   Payments,
   Settings,
   User,
@@ -39,7 +39,7 @@ const App = () => {
           <Route path="job" element={<Job />} />
           <Route path="payments" element={<Payments />} />
           <Route path="settings" element={<Settings />} />
-          <Route path="locations" element={<Location />} />
+          <Route path="locations" element={<Locations />} />
           <Route path="categories" element={<Categories />} />
           <Route path="edit-profile" element={<AdminProfileForm />} />
         </Route>

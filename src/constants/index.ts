@@ -6,6 +6,5 @@ configuration values) directly in components or functions.
 */
 
 // example:
-export const API_BASE_URL = "http://localhost:4000/api";
+export const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/api`;
 export const API_BASE_URL_Admin = `${API_BASE_URL}/admin`;
-
