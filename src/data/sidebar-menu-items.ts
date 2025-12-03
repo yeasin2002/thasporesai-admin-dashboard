@@ -30,4 +30,14 @@ export const dashboardMenuItems: MenuItemsType[] = [
     href: "/dashboard/settings",
     icon: "uil:setting",
   },
+  {
+    title: "Categories",
+    href: "/dashboard/categories",
+    icon: "carbon:collapse-categories",
+  },
+  {
+    title: "Locations",
+    href: "/dashboard/locations",
+    icon: "tabler:map-pin-filled",
+  },
 ];

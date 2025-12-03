@@ -1,20 +1,21 @@
 import { BrowserRouter, Route, Routes } from "react-router";
-import { NotFound, RootErrorBoundary } from "./page";
+import { NotFound, RootErrorBoundary } from "./page/common";
 
 import { AuthLayout, CommonDashboardLayout } from "./components/layout";
 import { dashboardMenuItems } from "./data";
+
 import { ForgotPassword, LoginPage, ResetPassword } from "./page/auth";
-import { DashboardOverview } from "./page/dashboard/dashboard-overview";
-import { Job } from "./page/dashboard/job";
-import { Payments } from "./page/dashboard/payments";
-import AdminProfileForm from "./page/dashboard/profile";
-import { Settings } from "./page/dashboard/settings";
-import { User } from "./page/dashboard/user";
-import useAuthStore from "./store/auth.store";
+import {
+  AdminProfileForm,
+  DashboardOverview,
+  Job,
+  Location,
+  Payments,
+  Settings,
+  User,
+} from "./page/dashboard";
 
 const App = () => {
-  const { accessToken } = useAuthStore.getState();
-  console.log("accessToken", accessToken);
   return (
     <BrowserRouter>
       <Routes>
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="job" element={<Job />} />
           <Route path="payments" element={<Payments />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="locations" element={<Location />} />
           <Route path="edit-profile" element={<AdminProfileForm />} />
         </Route>
 

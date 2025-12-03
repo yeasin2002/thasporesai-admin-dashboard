@@ -14,7 +14,7 @@ export const User = () => {
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const [currentFilter, setCurrentFilter] = useState("asc");
   const [page, setPage] = useState(1);
-  const [activeTabName, setActiveTabName] = useState<UserRole | null>(null);
+  const [activeTabName, setActiveTabName] = useState<UserRole>("customer");
 
   const handleSearchSubmit = (query: string, filter: string) => {
     console.log(`Searching for: "${query}" in the "${filter}" category.`);
@@ -53,14 +53,14 @@ export const User = () => {
         <Tabs>
           <TabList className="my-6 flex gap-4">
             <Tab
-              className="react-tabs__tab--selected:font-bold text-[18px] text-[#13527F]"
+              className="react-tabs__tab--selected:font-bold cursor-pointer text-[18px] text-[#13527F]"
               onClick={() => setActiveTabName("customer")}
             >
               Customers
             </Tab>
 
             <Tab
-              className="react-tabs__tab--selected:font-bold text-[18px] text-[#13527F]"
+              className="react-tabs__tab--selected:font-bold cursor-pointer text-[18px] text-[#13527F]"
               onClick={() => setActiveTabName("contractor")}
             >
               Contractors

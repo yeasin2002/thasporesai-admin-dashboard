@@ -3,7 +3,7 @@ import { Camera } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-function AdminProfileForm() {
+export function AdminProfileForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { register, handleSubmit, reset } = useForm({
@@ -216,5 +216,3 @@ function AdminProfileForm() {
     </div>
   );
 }
-
-export default AdminProfileForm;
