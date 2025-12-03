@@ -20,20 +20,33 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Trash2 } from "lucide-react";
-import { useState } from "react";
+import { Loader2, Trash2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 interface Props {
-  locations: Location[] | undefined;
+  locations: Location[];
   isLoading?: boolean;
   error?: Error | null;
+  onLoadMore?: () => void;
+  hasMore?: boolean;
+  isLoadingMore?: boolean;
+  totalCount?: number;
 }
 
-const LocationTable = ({ locations, isLoading, error }: Props) => {
+const LocationTable = ({
+  locations,
+  isLoading,
+  error,
+  onLoadMore,
+  hasMore,
+  isLoadingMore,
+  totalCount,
+}: Props) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>(null);
   const deleteMutation = useDeleteLocation();
+  const observerTarget = useRef<HTMLDivElement>(null);
 
   const handleDeleteClick = (id: string) => {
     setSelectedLocationId(id);
@@ -53,6 +66,29 @@ const LocationTable = ({ locations, isLoading, error }: Props) => {
       toast.error("Failed to delete location");
     }
   };
+
+  // Infinite scroll observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !isLoadingMore && onLoadMore) {
+          onLoadMore();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    const currentTarget = observerTarget.current;
+    if (currentTarget) {
+      observer.observe(currentTarget);
+    }
+
+    return () => {
+      if (currentTarget) {
+        observer.unobserve(currentTarget);
+      }
+    };
+  }, [hasMore, isLoadingMore, onLoadMore]);
 
   if (isLoading) {
     return <TableSkeletonLoader rows={5} columns={5} />;
@@ -77,7 +113,14 @@ const LocationTable = ({ locations, isLoading, error }: Props) => {
   return (
     <>
       <div className="rounded-xl bg-[#F8F8F8] p-6 shadow-sm">
-        <h2 className="mb-6 text-2xl font-semibold text-[#000000]">Location Management</h2>
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-2xl font-semibold text-[#000000]">Location Management</h2>
+          {totalCount !== undefined && (
+            <p className="text-sm text-gray-500">
+              Showing {locations.length} of {totalCount} locations
+            </p>
+          )}
+        </div>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
@@ -112,6 +155,19 @@ const LocationTable = ({ locations, isLoading, error }: Props) => {
               ))}
             </TableBody>
           </Table>
+        </div>
+
+        {/* Infinite scroll trigger */}
+        <div ref={observerTarget} className="py-4 text-center">
+          {isLoadingMore && (
+            <div className="flex items-center justify-center gap-2">
+              <Loader2 className="h-5 w-5 animate-spin text-[#13527F]" />
+              <span className="text-sm text-gray-500">Loading more locations...</span>
+            </div>
+          )}
+          {!hasMore && locations.length > 0 && (
+            <p className="text-sm text-gray-500">No more locations to load</p>
+          )}
         </div>
       </div>
 

@@ -12,11 +12,24 @@ export interface Location {
   updatedAt: string;
 }
 
+export interface LocationPagination {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
 export interface LocationsResponse {
   status: number;
   message: string;
   success: boolean;
-  data: Location[];
+  data: {
+    locations: Location[];
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
 }
 
 export interface LocationResponse {
@@ -57,4 +70,17 @@ export interface UpdateLocationData {
   state?: string;
   /** Coordinates (optional) */
   coordinates?: Coordinates;
+}
+
+/**
+ * Query parameters for fetching locations
+ * @see GET /api/location
+ */
+export interface GetLocationsParams {
+  /** Search by location name */
+  search?: string;
+  /** Page number (default: 1) */
+  page?: number;
+  /** Items per page (default: 10) */
+  limit?: number;
 }

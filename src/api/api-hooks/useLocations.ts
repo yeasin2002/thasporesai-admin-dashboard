@@ -1,5 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CreateLocationData, UpdateLocationData } from "../api-types/location.types";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  CreateLocationData,
+  GetLocationsParams,
+  UpdateLocationData,
+} from "../api-types/location.types";
 import {
   createLocation,
   deleteLocation,
@@ -9,18 +13,40 @@ import {
 } from "../query-list/location.query";
 
 /**
- * React Query hook for fetching all locations
+ * React Query hook for fetching all locations with pagination
+ * @param params - Query parameters for filtering and pagination
  * @returns Query result with locations data, loading state, and error
  * @example
  * ```tsx
- * const { data, isLoading, error } = useLocations();
- * const locations = data?.data; // Location[]
+ * const { data, isLoading, error } = useLocations({ search: "New", page: 1, limit: 10 });
+ * const locations = data?.data.locations;
+ * const pagination = data?.data;
  * ```
  */
-export const useLocations = () => {
+export const useLocations = (params?: GetLocationsParams) => {
   return useQuery({
-    queryKey: ["locations"],
-    queryFn: getLocations,
+    queryKey: ["locations", params],
+    queryFn: () => getLocations(params),
+  });
+};
+
+/**
+ * React Query hook for infinite scroll locations
+ * @param params - Query parameters for filtering (without page)
+ * @returns Infinite query result with locations data, loading state, and error
+ * @example
+ * ```tsx
+ * const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteLocations({ search: "New", limit: 10 });
+ * const allLocations = data?.pages.flatMap(page => page.data.locations) ?? [];
+ * ```
+ */
+export const useInfiniteLocations = (params?: Omit<GetLocationsParams, "page">) => {
+  return useInfiniteQuery({
+    queryKey: ["locations", "infinite", params],
+    queryFn: ({ pageParam = 1 }) => getLocations({ ...params, page: pageParam }),
+    getNextPageParam: (lastPage) =>
+      lastPage.data.page < lastPage.data.totalPages ? lastPage.data.page + 1 : undefined,
+    initialPageParam: 1,
   });
 };
 

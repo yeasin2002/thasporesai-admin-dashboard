@@ -13,6 +13,7 @@ interface SearchAndFilterBarProps extends React.ComponentProps<"div"> {
   onFilterChange?: (filter: string, query: string) => void;
   filterOptions?: string[];
   children?: React.ReactNode;
+  inputPlaceholder?: string;
 }
 
 const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
@@ -21,6 +22,7 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
   filterOptions = [],
   children,
   className,
+  inputPlaceholder,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterValue, setFilterValue] = useState(filterOptions[0]);
@@ -51,7 +53,7 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
       <div className="relative mr-4 flex-grow">
         <input
           type="text"
-          placeholder="Search by Name or Skills"
+          placeholder={inputPlaceholder || "Search....."}
           value={searchQuery}
           onChange={handleSearchChange}
           className="w-1/2 rounded-md border bg-white py-3 pr-4 pl-10 text-sm transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -76,19 +78,20 @@ const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
       </div>
 
       {/* Filter Dropdown Menu */}
-      <Select value={filterValue} onValueChange={handleFilterChange}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Theme" />
-        </SelectTrigger>
-        <SelectContent>
-          {filterOptions.map((option) => (
-            <SelectItem key={option} value={option}>
-              {option}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-
+      {filterValue && filterValue.length > 0 && (
+        <Select value={filterValue} onValueChange={handleFilterChange}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Theme" />
+          </SelectTrigger>
+          <SelectContent>
+            {filterOptions.map((option) => (
+              <SelectItem key={option} value={option}>
+                {option}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
       {children}
     </div>
   );

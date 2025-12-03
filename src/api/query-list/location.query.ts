@@ -3,19 +3,21 @@ import { AxiosError } from "axios";
 import {
   CreateLocationData,
   ErrorResponse,
+  GetLocationsParams,
   LocationResponse,
   LocationsResponse,
   UpdateLocationData,
 } from "../api-types/location.types";
 
 /**
- * Fetch all locations
- * @returns Promise with locations data
+ * Fetch all locations with pagination and search
+ * @param params - Query parameters for filtering locations
+ * @returns Promise with locations data and pagination info
  * @throws {AxiosError<ErrorResponse>} When the API request fails
  */
-export const getLocations = async (): Promise<LocationsResponse> => {
+export const getLocations = async (params?: GetLocationsParams): Promise<LocationsResponse> => {
   try {
-    const { data } = await axiosInstance.get<LocationsResponse>("/location");
+    const { data } = await axiosInstance.get<LocationsResponse>("/location", { params });
     return data;
   } catch (error) {
     if (error instanceof AxiosError) {
