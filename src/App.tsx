@@ -7,6 +7,7 @@ import { dashboardMenuItems } from "./data";
 import { ForgotPassword, LoginPage, ResetPassword } from "./page/auth";
 import {
   AdminProfileForm,
+  Categories,
   DashboardOverview,
   Job,
   Location,
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="payments" element={<Payments />} />
           <Route path="settings" element={<Settings />} />
           <Route path="locations" element={<Location />} />
+          <Route path="categories" element={<Categories />} />
           <Route path="edit-profile" element={<AdminProfileForm />} />
         </Route>
 
